@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Image,
   Alert,
-  // ActivityIndicator,
+  ActivityIndicator,
 } from "react-native";
 import { CheckBox } from "react-native-elements";
 import axios from "axios";
@@ -23,7 +23,7 @@ export default function Signup({ navigation }) {
   const [password, setPassword] = useState("");
   const [termsChecked, setTermsChecked] = useState(false);
   const [notificationsChecked, setNotificationsChecked] = useState(false);
-  // const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const [emailError, setEmailError] = useState(false);
   const [emailblankError, setEmailblankError] = useState(false);
@@ -67,7 +67,7 @@ export default function Signup({ navigation }) {
       setEmailblankError(false);
       setPassError(false);
 
-      // setLoading(true); // Start loader
+      setLoading(true); // Start loader
 
       axios
         .post(`http://restapi.adequateshop.com/api/authaccount/registration`, {
@@ -106,10 +106,10 @@ export default function Signup({ navigation }) {
         })
         .catch((err) => {
           console.log(err);
+        })
+        .finally(() => {
+          setLoading(false); // Stop loader
         });
-      // .finally(() => {
-      //   setLoading(false); // Stop loader
-      // });
     }
   };
 
@@ -280,11 +280,11 @@ export default function Signup({ navigation }) {
         style={styles.sendVerificationnew}
         onPress={handleSignup}
       >
-        {/* {loading ? (
+        {loading ? (
           <ActivityIndicator color="white" />
-        ) : ( */}
-        <Text style={styles.buttonText2}>Proceed</Text>
-        {/* )} */}
+        ) : (
+          <Text style={styles.buttonText2}>Proceed</Text>
+        )}
       </TouchableOpacity>
     </View>
   );

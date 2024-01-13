@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   Image,
   Alert,
-  // ActivityIndicator,
+  ActivityIndicator,
 } from "react-native";
 import { useDispatch } from "react-redux";
 
@@ -34,7 +34,7 @@ export default function Login({ navigation }) {
   const [passError, setPassError] = useState(false);
   //   const [nameError, setNameError] = useState(false);
   const [termsError, setTermsError] = useState(false);
-  // const [loading, setLoading] = useState(false); // Added loading state
+  const [loading, setLoading] = useState(false); // Added loading state
   const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = () => {
@@ -54,7 +54,7 @@ export default function Login({ navigation }) {
     if (email.includes("@") && email != "" && password != "") {
       //   console.log("Email:", email);
       //   console.log("Password:", password);
-      // setLoading(true);
+      setLoading(true);
 
       axios
         .post(`http://restapi.adequateshop.com/api/authaccount/login`, {
@@ -65,15 +65,13 @@ export default function Login({ navigation }) {
           if (res?.data?.message == "success") {
             console.log(res?.data);
             dispatch(loginObject(res?.data?.data));
-            navigation.navigate("Dashboard");
-            Alert.alert("Login Successful", "Welcome back!");
-            // setTimeout(() => {
-            //   // setLoading(false);
-            //   navigation.navigate("Dashboard");
-            //   Alert.alert("Login Successful", "Welcome back!");
-            // }, 1000);
+            setTimeout(() => {
+              setLoading(false);
+              navigation.navigate("Dashboard");
+              Alert.alert("Login Successful", "Welcome back!");
+            }, 1000);
           } else {
-            // setLoading(false);
+            setLoading(false);
             // console.log(res?.data?.message);
             Alert.alert(
               "Login Failed",
@@ -82,22 +80,22 @@ export default function Login({ navigation }) {
           }
         })
         .catch((err) => {
-          // setLoading(false);
-          console.log(err);
+          setLoading(false);
+          //   console.log(err);
         });
     }
   };
-  // useEffect(() => {
-  //   // Clean up loading state when component unmounts
-  //   return () => setLoading(false);
-  // }, []);
+  useEffect(() => {
+    // Clean up loading state when component unmounts
+    return () => setLoading(false);
+  }, []);
   return (
     <View style={styles.container}>
-      {/* {loading && (
+      {loading && (
         <View style={styles.loader}>
           <ActivityIndicator size="large" color="#047CFF" />
         </View>
-      )} */}
+      )}
       <Image
         source={topleft1}
         style={{
