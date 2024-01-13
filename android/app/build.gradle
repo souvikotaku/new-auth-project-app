@@ -85,6 +85,7 @@ android {
     defaultConfig {
         applicationId 'com.souvikpunk.productapp'
         minSdkVersion rootProject.ext.minSdkVersion
+        compileSdk 33
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0.0"
