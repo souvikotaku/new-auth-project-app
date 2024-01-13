@@ -101,6 +101,21 @@ export default function Signup({ navigation }) {
               { cancelable: false }
             );
           } else {
+            if (
+              res?.data?.message ===
+              "The email address you have entered is already registered"
+            ) {
+              Alert.alert(
+                "Registration Failed",
+                "Email address is already registered. Please use a different email."
+              );
+            } else {
+              // Display a generic error message for other cases
+              Alert.alert(
+                "Registration Failed",
+                "An error occurred during registration. Please try again."
+              );
+            }
             console.log(res?.data?.message);
           }
         })
