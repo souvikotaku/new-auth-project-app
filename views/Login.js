@@ -63,7 +63,7 @@ export default function Login({ navigation }) {
         })
         .then((res) => {
           if (res?.data?.message == "success") {
-            // console.log(res?.data);
+            console.log(res?.data);
             dispatch(loginObject(res?.data?.data));
             setTimeout(() => {
               setLoading(false);
