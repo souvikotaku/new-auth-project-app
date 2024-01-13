@@ -8,8 +8,7 @@
             "usesCleartextTraffic": true,
             "compileSdkVersion": 33,
             "targetSdkVersion": 33,
-            "buildToolsVersion": "33.0.0",
-            "flipper": true
+            "buildToolsVersion": "33.0.0"
           }
         }
       ]
